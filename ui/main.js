@@ -1,20 +1,24 @@
 //counter code
 var button = document.getElementByID('counter');
-var counter=0;
+
 button.onclick = function(){
-  // make  to the counter endpoint
+    
+  //  create the request object
   var request =new XMLHtpprequest();
   
   // capture the response and it in a variable
   request.onreadystatechange = function() {
-if (request.readystatechange)
-    
+if (request.readystatechange === XMLHtpprequest.DONE) {
+    // take some action
+    if(request.status===200) {
+        var counter = request.resposeText;
+        var span = document.getElementByID('count');
+         span.innerHTML =counter.tostring();
+}
+}
+    // not done yet
   };
-  
-  // render the variable in the correct span
-  counter = counter +1;
-  var span = document.getElementByID('count');
-  span.innerHTML =counter.tostring();
-  
-    
+// make  the request  
+request.open('GET','https://sakshipatel5555.imad.hasura.io/counter',true);
+request.send(null);
 };
